@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace EtteplanMORE.ServiceManual.ApplicationCore.Entities
 {
@@ -8,5 +10,6 @@ namespace EtteplanMORE.ServiceManual.ApplicationCore.Entities
         public string Name { get; set; }
         public int Year { get; set; }
         public string Type { get; set; }
+        public IEnumerable<MaintenanceTask> MaintenanceTasks { get; set; }
     }
 }
