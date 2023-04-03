@@ -10,6 +10,6 @@ namespace EtteplanMORE.ServiceManual.ApplicationCore.Entities
         public string Name { get; set; }
         public int Year { get; set; }
         public string Type { get; set; }
-        public IEnumerable<MaintenanceTask> MaintenanceTasks { get; set; }
+        public ICollection<MaintenanceTask> MaintenanceTasks { get; set; }
     }
 }

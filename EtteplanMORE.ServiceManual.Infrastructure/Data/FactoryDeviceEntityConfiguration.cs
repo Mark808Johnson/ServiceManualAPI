@@ -17,11 +17,6 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Data
             builder.Property(x => x.Year).IsRequired();
             builder.Property(x => x.Type).IsRequired();
 
-            //Configure one-to-many relationship with MaintenanceTask 
-            //builder
-            //    .HasMany(x => x.MaintenanceTasks)
-            //    .WithOne(y => y.TargetDevice);
-                //.HasForeignKey(x => x.Id);
         }
     }
 }
