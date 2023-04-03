@@ -1,5 +1,5 @@
-﻿using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
-using EtteplanMORE.ServiceManual.ApplicationCore.Services;
+﻿using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+using EtteplanMORE.ServiceManual.Infrastructure.Services;
 using EtteplanMORE.ServiceManual.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +26,7 @@ builder.Services.AddDbContext<ServiceManualContext>(options =>
 }); 
 
 builder.Services.AddScoped<IFactoryDeviceService, FactoryDeviceService>();
+builder.Services.AddScoped<IMaintenanceTaskService, MaintenanceTaskService>();
 
 var app = builder.Build();
 

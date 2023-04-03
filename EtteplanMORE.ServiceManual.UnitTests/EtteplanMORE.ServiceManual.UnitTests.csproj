@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EtteplanMORE.ServiceManual.ApplicationCore\EtteplanMORE.ServiceManual.ApplicationCore.csproj" />
+    <ProjectReference Include="..\EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

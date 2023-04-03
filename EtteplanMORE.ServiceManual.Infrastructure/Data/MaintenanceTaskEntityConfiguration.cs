@@ -10,6 +10,14 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Data
         {
             builder.ToTable("Maintenance Tasks");
 
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
+            builder.Property(x => x.TimeRegistered).IsRequired();
+            builder.Property(x => x.Description);
+            builder.Property(x => x.SeverityLevel).IsRequired();
+            builder.Property(x => x.CurrentStatus).IsRequired();
+
             builder
                 .HasOne<FactoryDevice>(x => x.TargetDevice)
                 .WithMany(y => y.MaintenanceTasks)

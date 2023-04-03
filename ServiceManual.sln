@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF3DF591-4736-4C73-99EC-27C4A8873DCA}"
+	ProjectSection(SolutionItems) = preProject
+		seeddata.csv = seeddata.csv
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{45B07AE1-339E-4C10-9AFA-699507BDB0D7}"
 EndProject
@@ -13,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.UnitTests", "EtteplanMORE.ServiceManual.UnitTests\EtteplanMORE.ServiceManual.UnitTests.csproj", "{0243164C-C71B-46D7-B4BF-03082CE230C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtteplanMORE.ServiceManual.Infrastructure", "EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.Infrastructure.csproj", "{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.Infrastructure", "EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.Infrastructure.csproj", "{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
