@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.SeedData
+namespace EtteplanMORE.ServiceManual.Infrastructure.Data.SeedData
 {
     public class SeedDataService
     {

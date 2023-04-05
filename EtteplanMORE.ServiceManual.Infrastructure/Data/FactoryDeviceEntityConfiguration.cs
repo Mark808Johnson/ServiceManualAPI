@@ -1,5 +1,5 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.SeedData;
+using EtteplanMORE.ServiceManual.Infrastructure.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

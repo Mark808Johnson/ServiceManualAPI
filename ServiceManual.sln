@@ -5,6 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF3DF591-4736-4C73-99EC-27C4A8873DCA}"
 	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
 		seeddata.csv = seeddata.csv
 	EndProjectSection
 EndProject
@@ -17,6 +18,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.UnitTests", "EtteplanMORE.ServiceManual.UnitTests\EtteplanMORE.ServiceManual.UnitTests.csproj", "{0243164C-C71B-46D7-B4BF-03082CE230C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.Infrastructure", "EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.Infrastructure.csproj", "{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3D3FA20-11F3-4328-ABC8-E372F9955009}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

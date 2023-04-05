@@ -123,6 +123,5 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
             _dbContext.Remove(taskToDelete);
             await _dbContext.SaveChangesAsync();
         }
-
     }
 }

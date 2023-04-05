@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.SeedData
+namespace EtteplanMORE.ServiceManual.Infrastructure.Data.SeedData
 {
     public class FactoryDeviceSeedData
     {
@@ -16,7 +16,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.SeedData
         public string Name { get; set; }
         [Name("Year")]
         public int Year { get; set; }
-        [Name("Type")] 
+        [Name("Type")]
         public string Type { get; set; }
     }
 }

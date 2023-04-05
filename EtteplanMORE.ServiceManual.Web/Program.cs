@@ -24,12 +24,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ServiceManualContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("ServiceManualConnection"),
-    //x => x.MigrationsAssembly("EtteplanMORE.ServiceManual.Infrastructure"));
-
-    options.UseSqlServer("server=localhost;database=ServiceManual;trusted_connection=true",
-        x => x.MigrationsAssembly("EtteplanMORE.ServiceManual.Infrastructure"));
-
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ServiceManualConnection"),
+    x => x.MigrationsAssembly("EtteplanMORE.ServiceManual.Infrastructure"));
 }); 
 
 builder.Services.AddScoped<IFactoryDeviceService, FactoryDeviceService>();

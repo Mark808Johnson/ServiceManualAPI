@@ -24,7 +24,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             _factoryDeviceService = factoryDeviceService;
             //_mapper = mapper;
         }
-
+        
         /// <summary>
         ///     HTTP GET: api/factorydevices    
         /// </summary>
