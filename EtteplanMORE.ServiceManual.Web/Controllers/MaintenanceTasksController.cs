@@ -2,10 +2,10 @@
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
 using EtteplanMORE.ServiceManual.Infrastructure.Services;
+using EtteplanMORE.ServiceManual.Web.Controllers.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Security.Cryptography.X509Certificates;
 
 namespace EtteplanMORE.ServiceManual.Web.Controllers
 {
@@ -18,22 +18,40 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
 
         public MaintenanceTasksController(
             IMaintenanceTaskService maintenanceeTaskService)
-            //IMapper mapper)
+        //IMapper mapper)
 
         {
             _maintenanceTaskService = maintenanceeTaskService;
             //_mapper = mapper;
         }
 
-        // POST: api/<MaintenanceTasksController>
+        /// <summary>
+        ///    HTTP POST: api/maintenancetasks/
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>
+        ///     Data about new maintenance task and "201 Created" status response. 
+        ///     "400 Bad Request" status response for errors.
+        /// </returns>
         [HttpPost]
-        public async Task<IActionResult> AddNewMaintenance([FromQuery] AddNewMaintenanceTaskRequest request)
+        public async Task<IActionResult> AddNewMaintenanceTask([FromQuery] AddNewMaintenanceTaskRequest request)
         {
             try
             {
-                var result = await _maintenanceTaskService.AddNewTask(request.Description, request.Severity, request.Status, request.TargetDeviceId);
+                var newTask = await _maintenanceTaskService.AddNewTask(request.Description, request.Severity, request.Status, request.TargetDeviceId);
 
-                return StatusCode(StatusCodes.Status201Created, result);
+                var result = new MaintenanceTaskDto
+                {
+                    Id = newTask.Id,
+                    TimeRegistered = newTask.TimeRegistered,
+                    Description = newTask.Description,
+                    SeverityLevel = newTask.SeverityLevel.ToString(),
+                    CurrentStatus = newTask.CurrentStatus.ToString(),
+                    TargetDeviceName = newTask.TargetDevice.Name,
+                    TargetDeviceId = newTask.TargetDeviceId
+                };
+
+                return CreatedAtAction(nameof(AddNewMaintenanceTask), result);
             }
 
             catch (Exception ex)
@@ -42,21 +60,25 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             }
         }
 
-        // <summary>
-        //     HTTP GET: api/factorydevices/
-        // </summary>
+        /// <summary>
+        ///     HTTP GET: api/maintenancetasks/
+        /// </summary>
+        /// <returns>
+        ///     List of all maintenance tasks in database.
+        /// </returns>
         [HttpGet]
         public async Task<IEnumerable<MaintenanceTaskDto>> GetAllMaintenanceTasks()
         {
-            var tasks = await _maintenanceTaskService.GetAllMaintenanceTasks();
+            var allTasks = await _maintenanceTaskService.GetAllMaintenanceTasks();
 
-            var result = tasks.Select(task => new MaintenanceTaskDto
+            var result = allTasks.Select(task => new MaintenanceTaskDto
             {
                 Id = task.Id,
                 TimeRegistered = task.TimeRegistered,
                 Description = task.Description,
                 SeverityLevel = task.SeverityLevel.ToString(),
                 CurrentStatus = task.CurrentStatus.ToString(),
+                TargetDeviceName = task.TargetDevice.Name,
                 TargetDeviceId = task.TargetDeviceId,
             });
 
@@ -64,54 +86,92 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
         }
 
 
-        // GET api/<MaintenanceTasksController>/5
-        [HttpGet("{id}")]
-        public async Task<IEnumerable<MaintenanceTaskDto>> GetMaintenanceTasksByDevice([FromRoute] int id )
-        {
-            var tasks = await _maintenanceTaskService.GetMaintenanceTasksByDevice(id);
-
-            var result = tasks.Select(task => new MaintenanceTaskDto
-            {
-                Id = task.Id,
-                TimeRegistered = task.TimeRegistered,
-                Description = task.Description,
-                SeverityLevel = task.SeverityLevel.ToString(),
-                CurrentStatus = task.CurrentStatus.ToString(),
-                TargetDeviceId = task.TargetDeviceId,
-            });
-
-            return result;
-        }
-
-        // PUT api/<MaintenanceTasksController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMaintenanceTask([FromRoute] int id, [FromQuery] UpdateMaintenanceTaskRequest request)
+        /// <summary>
+        ///     HTTP GET: api/maintenancetasks/{deviceId}
+        /// </summary>
+        /// <returns>
+        ///     List of all maintenance tasks targetting given device (by deviceId). 
+        ///     Returns "404 Not Found" status response if device not found in DB.
+        /// </returns>
+        [HttpGet("{deviceId}")]
+        public async Task<ActionResult<IEnumerable<MaintenanceTaskDto>>> GetMaintenanceTasksByDevice([FromRoute] int deviceId)
         {
             try
             {
-                await _maintenanceTaskService.ModifyMaintenanceTask(id, request.Description, request.Severitylevel, request.CurrentStatus); 
+                var tasks = await _maintenanceTaskService.GetMaintenanceTasksByDevice(deviceId);
+
+                var result = tasks.Select(task => new MaintenanceTaskDto
+                {
+                    Id = task.Id,
+                    TimeRegistered = task.TimeRegistered,
+                    Description = task.Description,
+                    SeverityLevel = task.SeverityLevel.ToString(),
+                    CurrentStatus = task.CurrentStatus.ToString(),
+                    TargetDeviceName = task.TargetDevice.Name,
+                    TargetDeviceId = task.TargetDeviceId,
+                });
+
+                return Ok(result);
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+        /// <summary>
+        ///     HTTP PUT: api/maintenancetasks/{taskId}
+        /// </summary>
+        /// <returns>
+        ///     Updates maintenance task data (by taskId) according to provided optional request data, and returns task data. 
+        ///     Returns "404 Not Found" status response if task not found in DB.
+        /// </returns>
+        [HttpPut("{taskId}")]
+        public async Task<IActionResult> UpdateMaintenanceTask([FromRoute] int taskId, [FromQuery] UpdateMaintenanceTaskRequest request)
+        {
+            try
+            {
+                var updatedTask = await _maintenanceTaskService.UpdateMaintenanceTask(taskId, request.Description, request.Severitylevel, request.CurrentStatus);
+
+                var result = new MaintenanceTaskDto
+                {
+                    Id = updatedTask.Id,
+                    TimeRegistered = updatedTask.TimeRegistered,
+                    Description = updatedTask.Description,
+                    SeverityLevel = updatedTask.SeverityLevel.ToString(),
+                    CurrentStatus = updatedTask.CurrentStatus.ToString(),
+                    TargetDeviceName = updatedTask.TargetDevice.Name,
+                    TargetDeviceId = updatedTask.TargetDeviceId
+                };
+
+                return Ok(result);
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///     HTTP DELETE: api/maintenancetasks/{taskId}
+        /// </summary>
+        /// <returns>
+        ///     Deletes maintenance task data (by taskId). 
+        ///     Returns "404 Not Found" status response if task not found in DB.
+        /// </returns>
+        [HttpDelete("{taskId}")]
+        public async Task<IActionResult> DeleteMaintenanceTask([FromRoute] int taskId)
+        {
+            try
+            {
+                await _maintenanceTaskService.DeleteMaintenanceTask(taskId);
                 return Ok();
             }
 
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status404NotFound, ex);
-            }
-        }
-
-        // DELETE api/<MaintenanceTasksController>/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMaintenanceTask([FromRoute] int id)
-        {
-            try
-            {
-                await _maintenanceTaskService.DeleteMaintenanceTask(id);
-                return Ok();
-            }
-
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, ex);
+                return NotFound(ex.Message);
             }
         }
     }

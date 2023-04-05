@@ -4,6 +4,7 @@ using EtteplanMORE.ServiceManual.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EtteplanMORE.ServiceManual.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiceManualContext))]
-    partial class ServiceManualContextModelSnapshot : ModelSnapshot
+    [Migration("20230405102952_AddedSeedDataToFactoryDeviceTable")]
+    partial class AddedSeedDataToFactoryDeviceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

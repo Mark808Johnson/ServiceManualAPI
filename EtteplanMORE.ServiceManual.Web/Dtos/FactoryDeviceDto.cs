@@ -7,7 +7,7 @@
         public int Year { get; set; }
         public string? Type { get; set; }
 
-        public IEnumerable<FactoryDeviceMaintenanceTasksDto> MaintenanceTasksDtos { get; set; }
+        public IEnumerable<FactoryDeviceMaintenanceTasksDto> MaintenanceTasks { get; set; }
     }
 
     public class FactoryDeviceMaintenanceTasksDto
@@ -18,17 +18,4 @@
         public string SeverityLevel { get; set; }
         public string CurrentStatus { get; set; }
     }
-
-    //public enum SeverityDto
-    //{
-    //    Critical = 2,
-    //    Important = 1,
-    //    Unimportant = 0
-    //}
-
-    //public enum StatusDto
-    //{
-    //    Open = 1,
-    //    Closed = 2
-    //}
 }

@@ -14,20 +14,23 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
     public class FactoryDevicesController : Controller
     {
         private readonly IFactoryDeviceService _factoryDeviceService;
-        private IMapper _mapper;
+        //private IMapper _mapper;
 
         public FactoryDevicesController(
-            IFactoryDeviceService factoryDeviceService,
-            IMapper mapper)
+            IFactoryDeviceService factoryDeviceService)
+            //IMapper mapper)
 
         {
             _factoryDeviceService = factoryDeviceService;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
-        // <summary>
-        //     HTTP GET: api/factorydevices/
-        // </summary>
+        /// <summary>
+        ///     HTTP GET: api/factorydevices    
+        /// </summary>
+        /// <returns>
+        ///     Data of all factory devices in database 
+        /// </returns>
         [HttpGet]
         public async Task<IEnumerable<FactoryDeviceDto>> GetAllDevices()
         {
@@ -39,7 +42,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 Name = device.Name,
                 Year = device.Year,
                 Type = device.Type,
-                MaintenanceTasksDtos = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
+                MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
                 {
                     Id = task.Id,
                     TimeRegistered = task.TimeRegistered,
@@ -55,12 +58,16 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
         /// <summary>
         ///     HTTP GET: api/factorydevices/1
         /// </summary>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDeviceById(int id)
+        /// <param name=deviceId></param>
+        /// <returns>
+        ///     Data of factory device by given Id. Returns "404 Not Found" response if no such device located in DB. 
+        /// </returns>
+        [HttpGet("{deviceId}")]
+        public async Task<IActionResult> GetDeviceById(int deviceId)
         {
             try
             {
-                var device = await _factoryDeviceService.GetFactoryDeviceById(id);
+                var device = await _factoryDeviceService.GetFactoryDeviceById(deviceId);
 
                 var result = new FactoryDeviceDto
                 {
@@ -68,7 +75,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                     Name = device.Name,
                     Year = device.Year,
                     Type = device.Type,
-                    MaintenanceTasksDtos = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
+                    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
                     {
                         Id = task.Id,
                         TimeRegistered = task.TimeRegistered,

@@ -34,6 +34,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
         public async Task<FactoryDevice> GetFactoryDeviceById(int id)
         {
             var factoryDevice = await _dbContext.FactoryDevices
+                .Include(x => x.MaintenanceTasks)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (factoryDevice == null) 

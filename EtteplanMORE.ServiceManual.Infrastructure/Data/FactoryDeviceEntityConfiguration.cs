@@ -1,6 +1,8 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
+using EtteplanMORE.ServiceManual.Infrastructure.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace EtteplanMORE.ServiceManual.Infrastructure.Data
 {
@@ -17,6 +19,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Data
             builder.Property(x => x.Year).IsRequired();
             builder.Property(x => x.Type).IsRequired();
 
+            builder.Seed();
         }
     }
 }

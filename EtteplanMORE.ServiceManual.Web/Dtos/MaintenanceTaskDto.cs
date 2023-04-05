@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public string SeverityLevel { get; set; }
         public string CurrentStatus { get; set; }
+        public string TargetDeviceName { get; set; }
         public int TargetDeviceId { get; set; }
     }
 }

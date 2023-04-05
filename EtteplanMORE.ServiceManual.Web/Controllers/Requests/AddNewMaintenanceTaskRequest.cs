@@ -1,7 +1,7 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace EtteplanMORE.ServiceManual.Web.Controllers
+namespace EtteplanMORE.ServiceManual.Web.Controllers.Requests
 {
     public class AddNewMaintenanceTaskRequest
     {

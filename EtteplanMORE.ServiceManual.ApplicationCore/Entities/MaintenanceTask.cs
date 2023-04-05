@@ -23,14 +23,14 @@ namespace EtteplanMORE.ServiceManual.ApplicationCore.Entities
 
     public enum Severity
     {
-        Critical = 2,
-        Important = 1,
-        Unimportant = 0
+        Critical = 1,
+        Important = 2,
+        Unimportant = 3
     }
 
     public enum Status
     {
-        Open = 1,
-        Closed = 2
+        Open = 0,
+        Closed = 1
     }
 }
