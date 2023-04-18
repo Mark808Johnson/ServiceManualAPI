@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
+﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
-using EtteplanMORE.ServiceManual.Infrastructure.Services;
 using EtteplanMORE.ServiceManual.Web.Controllers.Requests;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 
 namespace EtteplanMORE.ServiceManual.Web.Controllers
 {
@@ -14,15 +10,12 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
     public class MaintenanceTasksController : ControllerBase
     {
         private readonly IMaintenanceTaskService _maintenanceTaskService;
-        //private IMapper _mapper;
-
+        
         public MaintenanceTasksController(
             IMaintenanceTaskService maintenanceeTaskService)
-        //IMapper mapper)
-
+        
         {
             _maintenanceTaskService = maintenanceeTaskService;
-            //_mapper = mapper;
         }
 
         /// <summary>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AutoMapper;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -14,15 +13,11 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
     public class FactoryDevicesController : Controller
     {
         private readonly IFactoryDeviceService _factoryDeviceService;
-        //private IMapper _mapper;
-
+        
         public FactoryDevicesController(
             IFactoryDeviceService factoryDeviceService)
-            //IMapper mapper)
-
         {
             _factoryDeviceService = factoryDeviceService;
-            //_mapper = mapper;
         }
         
         /// <summary>
