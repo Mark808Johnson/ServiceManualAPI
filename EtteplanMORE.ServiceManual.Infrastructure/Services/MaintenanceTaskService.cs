@@ -1,5 +1,6 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using EtteplanMORE.ServiceManual.Infrastructure.Data;
+using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,7 +29,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
 
             if (device == null)
             {
-                throw new Exception("No factory device with given Id found in Database. Maintenance task cannot be added without targetting existing device");
+                throw new ArgumentException("No factory device with given Id found in Database. Maintenance task cannot be added without targetting existing device", nameof(targetDeviceId));
             }
 
             var newTask = new MaintenanceTask()
@@ -54,6 +55,11 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
                 .Select(x => x)
                 .OrderBy(x => x.SeverityLevel).ThenBy(x => x.TimeRegistered)
                 .ToListAsync();
+
+            if (maintenanceTasks.Count == 0)
+            {
+                throw new TaskNotFoundException("No maintenance tasks discovered in database");
+            }
                 
             return maintenanceTasks;
         }
@@ -65,7 +71,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
 
             if (factoryDevice == null)
             {
-                throw new Exception("No factory device with given Id found in Database");
+                throw new ArgumentException("No factory device with given Id found in Database", nameof(factoryDeviceId));
             }
 
             var maintenanceTasksbyDevice = await _dbContext.MaintenanceTasks
@@ -84,7 +90,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
 
             if (taskToUpdate == null)
             {
-                throw new Exception("No maintenance task with given Id found in Database");
+                throw new ArgumentException("No maintenance task with given Id found in Database", nameof(taskId));
             }
 
             if (description != null)
@@ -117,7 +123,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
 
             if (taskToDelete == null) 
             {
-                throw new Exception("No maintenance task with given Id found in Database");
+                throw new ArgumentException("No maintenance task with given Id found in Database", nameof(taskId));
             }
 
             _dbContext.Remove(taskToDelete);

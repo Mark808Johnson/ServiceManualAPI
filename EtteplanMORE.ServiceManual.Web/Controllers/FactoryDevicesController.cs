@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
+using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,41 +14,65 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
     public class FactoryDevicesController : Controller
     {
         private readonly IFactoryDeviceService _factoryDeviceService;
-        
+        private readonly ILogger<FactoryDevicesController> _logger;
+
         public FactoryDevicesController(
-            IFactoryDeviceService factoryDeviceService)
+            IFactoryDeviceService factoryDeviceService,
+            ILogger<FactoryDevicesController> logger)
         {
             _factoryDeviceService = factoryDeviceService;
+            _logger = logger;
         }
-        
+
         /// <summary>
         ///     HTTP GET: api/factorydevices    
         /// </summary>
         /// <returns>
         ///     Data of all factory devices in database 
+        ///     "404 NotFound" error response if no factory devices found in database.
+        ///     "500 InternalServer" error response for all other exceptions.
         /// </returns>
         [HttpGet]
-        public async Task<IEnumerable<FactoryDeviceDto>> GetAllDevices()
+        public async Task<ActionResult<IEnumerable<FactoryDeviceDto>>> GetAllDevices()
         {
-            var devices = await _factoryDeviceService.GetAllFactoryDevices();
-
-            var result = devices.Select(device => new FactoryDeviceDto
+            try
             {
-                Id = device.Id,
-                Name = device.Name,
-                Year = device.Year,
-                Type = device.Type,
-                MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
-                {
-                    Id = task.Id,
-                    TimeRegistered = task.TimeRegistered,
-                    Description = task.Description,
-                    SeverityLevel = task.SeverityLevel.ToString(),
-                    CurrentStatus = task.CurrentStatus.ToString()
-                }).ToList()
-            });
 
-            return result;
+                var devices = await _factoryDeviceService.GetAllFactoryDevices();
+
+                var result = devices.Select(device => new FactoryDeviceDto
+                {
+                    Id = device.Id,
+                    Name = device.Name,
+                    Year = device.Year,
+                    Type = device.Type,
+                    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
+                    {
+                        Id = task.Id,
+                        TimeRegistered = task.TimeRegistered,
+                        Description = task.Description,
+                        SeverityLevel = task.SeverityLevel.ToString(),
+                        CurrentStatus = task.CurrentStatus.ToString()
+                    }).ToList()
+                });
+
+                return Ok(result);
+            }
+
+            catch (DeviceNotFoundException ex)
+            {
+                _logger.LogError(ex, "No factory devices found in database");
+
+                return NotFound("No factory devices found in database");
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An unexpected error occurred while adding a new maintenance task.");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while processing the request.");
+
+            }
         }
 
         /// <summary>
@@ -83,9 +108,18 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 return Ok(result);
             }
 
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex, "An argument exception occurred while getting factory device.");
+
+                return NotFound("No factory device with given Id found in Database");
+            }
+
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                _logger.LogError(ex, "An unexpected error occurred while getting factory device data.");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while processing the request.");
             }
         }
     }
