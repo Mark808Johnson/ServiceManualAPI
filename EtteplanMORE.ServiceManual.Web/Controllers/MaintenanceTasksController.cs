@@ -156,6 +156,13 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 return NotFound("No factory device with given Id found in Database");
             }
 
+            catch (TaskNotFoundException ex)
+            {
+                _logger.LogError(ex, $"No maintenance tasks were found in database for device with given Id {deviceId}");
+
+                return NotFound("No maintenance tasks were found in database for device with given Id");
+            }
+
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An unexpected error occurred while getting maintenance device data.");

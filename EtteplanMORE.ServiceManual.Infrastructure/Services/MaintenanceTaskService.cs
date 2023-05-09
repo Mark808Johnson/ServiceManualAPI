@@ -78,6 +78,11 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
                 .Where(x => x.TargetDeviceId == factoryDevice.Id)
                 .OrderBy(x => x.SeverityLevel).ThenBy(x => x.TimeRegistered)
                 .ToListAsync();
+
+            if (maintenanceTasksbyDevice.Count == 0)
+            {
+                throw new TaskNotFoundException("No maintenance tasks discovered for given factory device");
+            }    
                 
             return maintenanceTasksbyDevice;
         }
