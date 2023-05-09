@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 using EtteplanMORE.ServiceManual.Infrastructure.Data;
+using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
 using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,7 +28,12 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
                 .Include(x => x.MaintenanceTasks)
                 .Select(x => x)
                 .ToListAsync();
-                
+
+            if (factoryDevices.Count == 0)
+            {
+                throw new DeviceNotFoundException("No factory device discovered in database");
+            }
+
             return factoryDevices;
         }
 
@@ -39,7 +45,7 @@ namespace EtteplanMORE.ServiceManual.Infrastructure.Services
 
             if (factoryDevice == null) 
             {
-                throw new Exception("No factory device discovered with given id");
+                throw new ArgumentException("No factory device discovered with given id");
             }
 
             return factoryDevice;
