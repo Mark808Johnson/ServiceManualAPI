@@ -52,17 +52,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
 
                 var result = _mapper.Map<MaintenanceTaskDto>(newTask);
 
-                //var result = new MaintenanceTaskDto
-                //{
-                //    Id = newTask.Id,
-                //    TimeRegistered = newTask.TimeRegistered,
-                //    Description = newTask.Description,
-                //    SeverityLevel = newTask.SeverityLevel.ToString(),
-                //    CurrentStatus = newTask.CurrentStatus.ToString(),
-                //    TargetDeviceName = newTask.TargetDevice.Name,
-                //    TargetDeviceId = newTask.TargetDeviceId
-                //};
-
                 return CreatedAtAction(nameof(AddNewMaintenanceTask), result);
             }
 
@@ -97,17 +86,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 var allTasks = await _maintenanceTaskService.GetAllMaintenanceTasks();
 
                 var result = _mapper.Map<IEnumerable<MaintenanceTaskDto>>(allTasks);
-
-                //var result = allTasks.Select(task => new MaintenanceTaskDto
-                //{
-                //    Id = task.Id,
-                //    TimeRegistered = task.TimeRegistered,
-                //    Description = task.Description,
-                //    SeverityLevel = task.SeverityLevel.ToString(),
-                //    CurrentStatus = task.CurrentStatus.ToString(),
-                //    TargetDeviceName = task.TargetDevice.Name,
-                //    TargetDeviceId = task.TargetDeviceId,
-                //});
 
                 return Ok(result);
             }
@@ -144,17 +122,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 var tasks = await _maintenanceTaskService.GetMaintenanceTasksByDevice(deviceId);
 
                 var result = _mapper.Map<IEnumerable<MaintenanceTaskDto>>(tasks);
-
-                //var result = tasks.Select(task => new MaintenanceTaskDto
-                //{
-                //    Id = task.Id,
-                //    TimeRegistered = task.TimeRegistered,
-                //    Description = task.Description,
-                //    SeverityLevel = task.SeverityLevel.ToString(),
-                //    CurrentStatus = task.CurrentStatus.ToString(),
-                //    TargetDeviceName = task.TargetDevice.Name,
-                //    TargetDeviceId = task.TargetDeviceId,
-                //});
 
                 return Ok(result);
             }
@@ -204,17 +171,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
 
                 var result = _mapper.Map<MaintenanceTaskDto>(updatedTask);
                 
-                //var result = new MaintenanceTaskDto
-                //{
-                //    Id = updatedTask.Id,
-                //    TimeRegistered = updatedTask.TimeRegistered,
-                //    Description = updatedTask.Description,
-                //    SeverityLevel = updatedTask.SeverityLevel.ToString(),
-                //    CurrentStatus = updatedTask.CurrentStatus.ToString(),
-                //    TargetDeviceName = updatedTask.TargetDevice.Name,
-                //    TargetDeviceId = updatedTask.TargetDeviceId
-                //};
-
                 return Ok(result);
             }
 

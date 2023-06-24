@@ -42,22 +42,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
 
                 var result = devices.Select(device => _mapper.Map<FactoryDeviceDto>(device));
 
-                //var result = devices.Select(device => new FactoryDeviceDto
-                //{
-                //    Id = device.Id,
-                //    Name = device.Name,
-                //    Year = device.Year,
-                //    Type = device.Type,
-                //    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
-                //    {
-                //        Id = task.Id,
-                //        TimeRegistered = task.TimeRegistered,
-                //        Description = task.Description,
-                //        SeverityLevel = task.SeverityLevel.ToString(),
-                //        CurrentStatus = task.CurrentStatus.ToString()
-                //    }).ToList()
-                //});
-
                 return Ok(result);
             }
 
@@ -92,22 +76,6 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
                 var device = await _factoryDeviceService.GetFactoryDeviceById(deviceId);
 
                 var result = _mapper.Map<FactoryDeviceDto>(device);
-
-                //var result = new FactoryDeviceDto
-                //{
-                //    Id = device.Id,
-                //    Name = device.Name,
-                //    Year = device.Year,
-                //    Type = device.Type,
-                //    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
-                //    {
-                //        Id = task.Id,
-                //        TimeRegistered = task.TimeRegistered,
-                //        Description = task.Description,
-                //        SeverityLevel = task.SeverityLevel.ToString(),
-                //        CurrentStatus = task.CurrentStatus.ToString() 
-                //    }).ToList()
-                //};
 
                 return Ok(result);
             }
