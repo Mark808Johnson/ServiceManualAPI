@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Migrations
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Migrations
 {
     public partial class CreatedServiceManualDbAndTables : Migration
     {

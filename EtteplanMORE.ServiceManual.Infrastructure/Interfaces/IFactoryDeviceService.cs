@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Interfaces
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Interfaces
 {
     public interface IFactoryDeviceService
     {

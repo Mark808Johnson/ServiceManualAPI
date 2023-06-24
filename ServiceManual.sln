@@ -11,13 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DF3DF591-473
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{45B07AE1-339E-4C10-9AFA-699507BDB0D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.ApplicationCore", "EtteplanMORE.ServiceManual.ApplicationCore\EtteplanMORE.ServiceManual.ApplicationCore.csproj", "{DF1323A6-89FB-43AA-AFEE-223346F7E9C9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.Web", "EtteplanMORE.ServiceManual.Web\EtteplanMORE.ServiceManual.Web.csproj", "{BE96519C-38B3-4134-9C37-0933B1571FF3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.UnitTests", "EtteplanMORE.ServiceManual.UnitTests\EtteplanMORE.ServiceManual.UnitTests.csproj", "{0243164C-C71B-46D7-B4BF-03082CE230C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.Infrastructure", "EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.Infrastructure.csproj", "{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtteplanMORE.ServiceManual.ApplicationCore", "EtteplanMORE.ServiceManual.Infrastructure\EtteplanMORE.ServiceManual.ApplicationCore.csproj", "{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3D3FA20-11F3-4328-ABC8-E372F9955009}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF1323A6-89FB-43AA-AFEE-223346F7E9C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF1323A6-89FB-43AA-AFEE-223346F7E9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF1323A6-89FB-43AA-AFEE-223346F7E9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF1323A6-89FB-43AA-AFEE-223346F7E9C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE96519C-38B3-4134-9C37-0933B1571FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE96519C-38B3-4134-9C37-0933B1571FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE96519C-38B3-4134-9C37-0933B1571FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,7 +45,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DF1323A6-89FB-43AA-AFEE-223346F7E9C9} = {DF3DF591-4736-4C73-99EC-27C4A8873DCA}
 		{BE96519C-38B3-4134-9C37-0933B1571FF3} = {DF3DF591-4736-4C73-99EC-27C4A8873DCA}
 		{0243164C-C71B-46D7-B4BF-03082CE230C9} = {45B07AE1-339E-4C10-9AFA-699507BDB0D7}
 		{5788C8CD-2CC1-4B12-8F91-DEE5C70B7208} = {DF3DF591-4736-4C73-99EC-27C4A8873DCA}

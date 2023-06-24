@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Data
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Data
 {
     public class MaintenanceTaskEntityConfiguration : IEntityTypeConfiguration<MaintenanceTask>
     {

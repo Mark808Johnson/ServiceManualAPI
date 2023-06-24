@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
 using Xunit;
-using EtteplanMORE.ServiceManual.Infrastructure.Services;
+using EtteplanMORE.ServiceManual.ApplicationCore.Services;
 
 namespace EtteplanMORE.ServiceManual.UnitTests.ApplicationCore.Services.FactoryDeviceServiceTests
 {

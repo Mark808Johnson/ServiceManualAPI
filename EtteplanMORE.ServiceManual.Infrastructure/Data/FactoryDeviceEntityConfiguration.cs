@@ -1,10 +1,10 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.Data.SeedData;
+using EtteplanMORE.ServiceManual.ApplicationCore.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Data
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Data
 {
     public class FactoryDeviceEntityConfiguration : IEntityTypeConfiguration<FactoryDevice>
     {
