@@ -4,12 +4,12 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.Data;
-using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
-using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+using EtteplanMORE.ServiceManual.ApplicationCore.Data;
+using EtteplanMORE.ServiceManual.ApplicationCore.Exceptions;
+using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Services
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Services
 {
     public class FactoryDeviceService : IFactoryDeviceService
     {

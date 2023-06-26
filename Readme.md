@@ -13,7 +13,7 @@
 
 3. Amend ServiceManualConnection string in appsettings.json file accordingly to match your own local SQL server.
 
-4. Navigate to EtteplanMORE.ServiceManual.Infrastructure project in console.
+4. Navigate to EtteplanMORE.ServiceManual.ApplicationCore project in console.
 
 5. Run the following command: 
      

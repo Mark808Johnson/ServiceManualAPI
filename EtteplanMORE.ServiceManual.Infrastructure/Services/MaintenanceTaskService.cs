@@ -1,7 +1,7 @@
 ﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.Data;
-using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
-using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+using EtteplanMORE.ServiceManual.ApplicationCore.Data;
+using EtteplanMORE.ServiceManual.ApplicationCore.Exceptions;
+using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Services
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Services
 {
     public class MaintenanceTaskService : IMaintenanceTaskService
     {

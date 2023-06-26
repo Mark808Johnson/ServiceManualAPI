@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Data
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Data
 {
     public class ServiceManualContext : DbContext
     {

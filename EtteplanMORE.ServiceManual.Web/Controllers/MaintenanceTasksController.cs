@@ -1,6 +1,7 @@
-﻿using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
-using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+﻿using AutoMapper;
+using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
+using EtteplanMORE.ServiceManual.ApplicationCore.Exceptions;
+using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
 using EtteplanMORE.ServiceManual.Web.Controllers.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,20 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
     public class MaintenanceTasksController : ControllerBase
     {
         private readonly IMaintenanceTaskService _maintenanceTaskService;
+        private readonly IMapper _mapper;
         private readonly ILogger<MaintenanceTasksController> _logger;
-        
+
         public MaintenanceTasksController(
             IMaintenanceTaskService maintenanceTaskService,
+            IMapper mapper,
             ILogger<MaintenanceTasksController> logger
-            )
-        
+        )
         {
             _maintenanceTaskService = maintenanceTaskService;
+            _mapper = mapper;
             _logger = logger;
         }
+
 
         /// <summary>
         ///    HTTP POST: api/maintenancetasks/
@@ -46,16 +50,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             {
                 var newTask = await _maintenanceTaskService.AddNewTask(request.Description, request.Severity, request.Status, request.TargetDeviceId);
 
-                var result = new MaintenanceTaskDto
-                {
-                    Id = newTask.Id,
-                    TimeRegistered = newTask.TimeRegistered,
-                    Description = newTask.Description,
-                    SeverityLevel = newTask.SeverityLevel.ToString(),
-                    CurrentStatus = newTask.CurrentStatus.ToString(),
-                    TargetDeviceName = newTask.TargetDevice.Name,
-                    TargetDeviceId = newTask.TargetDeviceId
-                };
+                var result = _mapper.Map<MaintenanceTaskDto>(newTask);
 
                 return CreatedAtAction(nameof(AddNewMaintenanceTask), result);
             }
@@ -90,16 +85,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             {
                 var allTasks = await _maintenanceTaskService.GetAllMaintenanceTasks();
 
-                var result = allTasks.Select(task => new MaintenanceTaskDto
-                {
-                    Id = task.Id,
-                    TimeRegistered = task.TimeRegistered,
-                    Description = task.Description,
-                    SeverityLevel = task.SeverityLevel.ToString(),
-                    CurrentStatus = task.CurrentStatus.ToString(),
-                    TargetDeviceName = task.TargetDevice.Name,
-                    TargetDeviceId = task.TargetDeviceId,
-                });
+                var result = _mapper.Map<IEnumerable<MaintenanceTaskDto>>(allTasks);
 
                 return Ok(result);
             }
@@ -135,16 +121,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             {
                 var tasks = await _maintenanceTaskService.GetMaintenanceTasksByDevice(deviceId);
 
-                var result = tasks.Select(task => new MaintenanceTaskDto
-                {
-                    Id = task.Id,
-                    TimeRegistered = task.TimeRegistered,
-                    Description = task.Description,
-                    SeverityLevel = task.SeverityLevel.ToString(),
-                    CurrentStatus = task.CurrentStatus.ToString(),
-                    TargetDeviceName = task.TargetDevice.Name,
-                    TargetDeviceId = task.TargetDeviceId,
-                });
+                var result = _mapper.Map<IEnumerable<MaintenanceTaskDto>>(tasks);
 
                 return Ok(result);
             }
@@ -192,17 +169,8 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             {
                 var updatedTask = await _maintenanceTaskService.UpdateMaintenanceTask(taskId, request.Description, request.SeverityLevel, request.CurrentStatus);
 
-                var result = new MaintenanceTaskDto
-                {
-                    Id = updatedTask.Id,
-                    TimeRegistered = updatedTask.TimeRegistered,
-                    Description = updatedTask.Description,
-                    SeverityLevel = updatedTask.SeverityLevel.ToString(),
-                    CurrentStatus = updatedTask.CurrentStatus.ToString(),
-                    TargetDeviceName = updatedTask.TargetDevice.Name,
-                    TargetDeviceId = updatedTask.TargetDeviceId
-                };
-
+                var result = _mapper.Map<MaintenanceTaskDto>(updatedTask);
+                
                 return Ok(result);
             }
 

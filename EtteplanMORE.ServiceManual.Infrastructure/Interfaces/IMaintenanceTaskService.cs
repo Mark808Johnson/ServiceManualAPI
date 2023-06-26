@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Interfaces
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Interfaces
 {
     public interface IMaintenanceTaskService
     {

@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Data.SeedData
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Data.SeedData
 {
     public static class EntityBuilderExtension
     {

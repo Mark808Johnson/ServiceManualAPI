@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using EtteplanMORE.ServiceManual.ApplicationCore.Entities;
-using EtteplanMORE.ServiceManual.Infrastructure.Exceptions;
-using EtteplanMORE.ServiceManual.Infrastructure.Interfaces;
+using EtteplanMORE.ServiceManual.ApplicationCore.Exceptions;
+using EtteplanMORE.ServiceManual.ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtteplanMORE.ServiceManual.Web.Controllers
 {
     [Route("api/[controller]")]
-    public class FactoryDevicesController : Controller
+    [ApiController]
+    public class FactoryDevicesController : ControllerBase
     {
         private readonly IFactoryDeviceService _factoryDeviceService;
+        private readonly IMapper _mapper;
         private readonly ILogger<FactoryDevicesController> _logger;
 
         public FactoryDevicesController(
             IFactoryDeviceService factoryDeviceService,
+            IMapper mapper,
             ILogger<FactoryDevicesController> logger)
         {
             _factoryDeviceService = factoryDeviceService;
+            _mapper = mapper;
             _logger = logger;
         }
 
@@ -40,21 +40,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
 
                 var devices = await _factoryDeviceService.GetAllFactoryDevices();
 
-                var result = devices.Select(device => new FactoryDeviceDto
-                {
-                    Id = device.Id,
-                    Name = device.Name,
-                    Year = device.Year,
-                    Type = device.Type,
-                    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
-                    {
-                        Id = task.Id,
-                        TimeRegistered = task.TimeRegistered,
-                        Description = task.Description,
-                        SeverityLevel = task.SeverityLevel.ToString(),
-                        CurrentStatus = task.CurrentStatus.ToString()
-                    }).ToList()
-                });
+                var result = devices.Select(device => _mapper.Map<FactoryDeviceDto>(device));
 
                 return Ok(result);
             }
@@ -89,21 +75,7 @@ namespace EtteplanMORE.ServiceManual.Web.Controllers
             {
                 var device = await _factoryDeviceService.GetFactoryDeviceById(deviceId);
 
-                var result = new FactoryDeviceDto
-                {
-                    Id = device.Id,
-                    Name = device.Name,
-                    Year = device.Year,
-                    Type = device.Type,
-                    MaintenanceTasks = device.MaintenanceTasks.Select(task => new FactoryDeviceMaintenanceTasksDto
-                    {
-                        Id = task.Id,
-                        TimeRegistered = task.TimeRegistered,
-                        Description = task.Description,
-                        SeverityLevel = task.SeverityLevel.ToString(),
-                        CurrentStatus = task.CurrentStatus.ToString() 
-                    }).ToList()
-                };
+                var result = _mapper.Map<FactoryDeviceDto>(device);
 
                 return Ok(result);
             }

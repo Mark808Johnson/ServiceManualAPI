@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtteplanMORE.ServiceManual.Infrastructure.Exceptions
+namespace EtteplanMORE.ServiceManual.ApplicationCore.Exceptions
 {
     public class TaskNotFoundException : Exception
     {
